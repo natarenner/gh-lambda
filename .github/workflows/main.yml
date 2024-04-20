@@ -26,5 +26,8 @@ jobs:
           npm ci
       - name: deploy
         run: |
+          mkdir lambda
           zip -r deploy.zip ./*
-          aws lambda update-function-code --function-name=hello-world --zip-file=fileb://deploy.zip
+          mv ./deploy.zip ./lambda
+          aws s3 sync ./lambda s3://starks-lambda
+          aws lambda update-function-code --function-name=hello-world --s3-key=s3://starks-lambda/deploy.zip

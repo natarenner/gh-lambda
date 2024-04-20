@@ -1,7 +1,7 @@
 import _ from 'lodash';
 
 export const handler = async (event) => {
-  const max = 999;
+  const max = 99;
   const val = _.random(max);
   const response = {
     statusCode: 200,
